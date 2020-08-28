@@ -14,7 +14,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest req,
                        HttpServletResponse res,
                        AccessDeniedException accessDeniedException)
-                                throws IOException, ServletException {
+            throws IOException, ServletException {
         /* Error Handling & Info */
         ErrorInfoApi errorInfoApi = new ErrorInfoApi();
         errorInfoApi.setMessage("Access Denied");

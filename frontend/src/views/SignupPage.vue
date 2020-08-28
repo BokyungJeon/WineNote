@@ -1,18 +1,21 @@
 <template>
-  <div align="center">
-    <h2>Register First Adminstartor</h2>
-    <admin-setup-form @submit="onSubmit"/>
-  </div>
+  <layout>
+    <template #content>
+      <signup-form @submit="onSubmit"/>
+    </template>
+  </layout>
 </template>
 
 <script>
 import axios from 'axios'
-import AdminSetupForm from '@/components/AdminSetupForm.vue'
+import SignupForm from '@/components/SignupForm.vue'
+import Layout from '@/components/Layout.vue'
 
 export default {
-  name: 'AdminSetupPage',
+  name: 'SignupPage',
   components: {
-    AdminSetupForm
+    SignupForm,
+    Layout
   },
   methods: {
     onSubmit (payload) {

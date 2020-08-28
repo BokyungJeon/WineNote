@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import BoardRead from '@/components/BoardRead'
+import BoardRead from '@/components/BoardForm/BoardRead'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 

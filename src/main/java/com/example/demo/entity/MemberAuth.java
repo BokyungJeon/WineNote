@@ -32,5 +32,5 @@ public class MemberAuth {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @UpdateTimestamp
-    private Date updDate;
+    private Date upDate;
 }

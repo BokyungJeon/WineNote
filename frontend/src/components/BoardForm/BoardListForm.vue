@@ -16,13 +16,11 @@
       </tr>
     </table>
     <div class="btn-cover">
-      <button :disabled="pageNum === 0"
-        @click="prevPage" class="page-btn">
+      <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
       </button>
       <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button :disabled="pageNum >= pageCount - 1"
-        @click="nextPage" class="page-btn">
+      <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
         다음
       </button>
     </div>
@@ -30,8 +28,9 @@
 </template>
 
 <script>
+
 export default {
-  name: 'VuetifyListPageForm',
+  name: 'BoardListForm',
   data () {
     return {
       pageNum: 0

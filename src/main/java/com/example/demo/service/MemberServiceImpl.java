@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService {
         memEntity.setJob(member.getJob());
 
         MemberAuth memberAuth = new MemberAuth();
-        memberAuth.setAuth("ROLE_MEMBER");
+        memberAuth.setAuth("ROLE_MEMBER;");
 
         memEntity.addAuth(memberAuth);
 
@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void modify(Member member) throws Exception {
+    public void modify(Member member) throws Exception{
         Member memEntity = repository.getOne(member.getUserNo());
         memEntity.setUserName(member.getUserName());
         memEntity.setJob(member.getJob());
@@ -77,7 +77,6 @@ public class MemberServiceImpl implements MemberService {
                 memberAuth.setAuth(auth.getAuth());
             }
         }
-
         repository.save(memEntity);
     }
 
@@ -97,8 +96,7 @@ public class MemberServiceImpl implements MemberService {
             mem.setUserNo((Long) valArr[0]);
             mem.setUserId((String) valArr[1]);
             mem.setUserPw((String) valArr[2]);
-            mem.setUserName((String) valArr[3]);
-            mem.setJob((String) valArr[4]);
+            mem.setJob((String) valArr[3]);
             mem.setRegDate((Date) valArr[5]);
 
             memberList.add(mem);

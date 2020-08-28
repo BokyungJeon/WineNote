@@ -1,10 +1,10 @@
 <template>
-  <v-app id="login" >
+  <v-app id="signup">
     <v-row align="center" justify="center">
       <v-form @submit.prevent="submit">
         <v-col align="center">
           <v-text-field
-            v-model="userid"
+            v-model="userId"
             label="ID"
             required
           ></v-text-field>
@@ -12,7 +12,7 @@
         <v-col align="center">
           <v-text-field
             input type="password"
-            v-model="password"
+            v-model="userPw"
             label="Password"
             required
           ></v-text-field>
@@ -27,18 +27,19 @@
 
 <script>
 export default {
-  name: 'LoginForm',
+  name: 'SignupForm',
   data () {
     return {
-      userid: '',
-      password: ''
+      userId: '',
+      userName: '',
+      userPw: ''
     }
   },
   methods: {
     submit () {
-      console.log('LoginForm submit()')
-      const { userid, password } = this
-      this.$emit('submit', { userid, password })
+      console.log('this: ' + this.userId + ', ' + this.userName + ', ' + this.userPw)
+      const { userId, userName, userPw } = this
+      this.$emit('submit', { userId, userName, userPw })
     }
   }
 }

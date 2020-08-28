@@ -18,8 +18,6 @@ function init () {
   if (savedToken) {
     return store.dispatch('loginByToken', savedToken)
   } else {
-    // Promise는 비동기 처리
-    // 스레드, 컨텍스트 스위칭, 뮤텍스, 세마포어, 비동기 처리, 동기 처리
     return Promise.resolve()
   }
 }

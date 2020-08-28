@@ -18,17 +18,17 @@ public class MemberAuthRepository {
     public MemberAuth checkAuth(Long userNo) throws Exception {
         List<MemberAuth> results = jdbcTemplate.query(
             "select user_no, auth from member_auth where user_auth_no = ?",
-            new RowMapper<MemberAuth>() {
-                @Override
-                public MemberAuth mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    MemberAuth mAuth = new MemberAuth();
+                new RowMapper<MemberAuth>() {
+                    @Override
+                    public MemberAuth mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        MemberAuth mAuth = new MemberAuth();
 
-                    mAuth.setUserNo(rs.getLong("user_no"));
-                    mAuth.setAuth(rs.getString("auth"));
+                        mAuth.setUserNo(rs.getLong("user_no"));
+                        mAuth.setAuth(rs.getString("auth"));
 
-                    return mAuth;
-                }
-            }, userNo
+                        return mAuth;
+                    }
+                }, userNo
         );
 
         return results.isEmpty() ? null : results.get(0);

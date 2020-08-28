@@ -1,80 +1,15 @@
 <template>
-  <div class="home">
-    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <div id="header" v-if="isAuthorized">
-      <button id="login" @click="onClickLogout">Logout</button>
-      <router-link :to="{ name: 'Home' }"
-          class="nav-link"
-          active-class="active">
-        Home
-      </router-link>
-      <router-link :to="{ name: 'About' }"
-          class="nav-link"
-          active-class="active">
-        About Us
-      </router-link>
-      <router-link :to="{ name: 'Test' }"
-          class="nav-link"
-          active-class="active">
-        Test
-      </router-link>
-      <router-link :to="{ name: 'Todo' }"
-          class="nav-link"
-          active-class="active">
-        Todo
-      </router-link>
-      <router-link :to="{ name: 'Concave' }"
-          class="nav-link"
-          active-class="active">
-        Concave
-      </router-link>
-      <router-link :to="{ name: 'BoardListPage' }"
-          class="nav-link"
-          active-class="active">
-        Board
-      </router-link>
-      <router-link :to="{ name: 'VuetifyBoard' }"
-          class="nav-link"
-          active-class="active">
-        VuetifyBoard
-      </router-link>
-      <router-link :to="{ name: 'VuetifyBoardListPage' }"
-          class="nav-link"
-          active-class="active">
-        VuetifyBoardListPage
-      </router-link>
-      <router-link :to="{ name: 'CrawlCategory' }"
-          class="nav-link"
-          active-class="active">
-        CrawlCategory
-      </router-link>
-      <h2>This is an Home Page</h2>
-      <div id="app">
-        {{ message }}<br>
-      </div>
-      <div>
-        <br><span>{{ myinfo.auth }}계정, 접속을 환영합니다.</span>
-      </div>
-    </div>
-    <div id="header" v-else>
-      <button id="login" @click="$router.push('LoginPage')">
-        Login
-      </button>
-      <button id="login" @click="$router.push('AdminSetupPage')">
-        Register Admin
-      </button>
-      <router-link :to="{ name: 'Home' }"
-          class="nav-link"
-          active-class="active">
-        Home
-      </router-link>
-      <router-link :to="{ name: 'About' }"
-          class="nav-link"
-          active-class="active">
-        About Us
-      </router-link>
-    </div>
-  </div>
+  <v-card>
+    <Layout>
+      <v-sheet
+        id="scrolling-techniques-2"
+        class="overflow-y-auto"
+        max-height="600"
+      >
+        <v-container style="height: 1000px;"></v-container>
+      </v-sheet>
+    </Layout>
+  </v-card>
 </template>
 
 <script>
@@ -84,16 +19,18 @@
 import store from '../store'
 import Vue from 'vue'
 // import cookies from 'vue-cookies'
-
+import Layout from '../components/Layout'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 // Vue.use(cookies)
 
 export default {
   name: 'Home',
+  components: {
+    Layout
+  },
   data: function () {
     return {
-      message: 'Vue Test Message'
     }
   },
   methods: {
@@ -107,15 +44,12 @@ export default {
   computed: {
     ...mapState(['myinfo']),
     ...mapGetters(['isAuthorized'])
-  },
-  components: {
   }
 }
 </script>
 
 <style scoped>
 div {
-  border: 1px solid #ccc;
 }
 
 #header {

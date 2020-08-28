@@ -1,21 +1,21 @@
 <template>
-  <div id="board">
+  <div id="board" align="center">
     <h2>Board List</h2>
     <router-link :to="{ name: 'BoardRegisterPage' }">
       Create New Board
     </router-link>
-    <board-list :boards="boards"/>
+    <board-list-form :boards="boards"/>
   </div>
 </template>
 
 <script>
-import BoardList from '@/components/BoardList'
+import BoardListForm from '@/components/BoardForm/BoardListForm'
 import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'BoardListPage',
   components: {
-    BoardList
+    BoardListForm
   },
   computed: {
     ...mapState(['boards'])

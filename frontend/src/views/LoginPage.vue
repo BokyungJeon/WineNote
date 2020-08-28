@@ -1,18 +1,22 @@
 <template>
-  <div align="center">
-    <h2>Login</h2>
-    <login-form @submit="onSubmit"/>
-  </div>
+  <layout>
+    <template #content>
+      <login-form @submit="onSubmit"/>
+    </template>
+  </layout>
 </template>
 
 <script>
 import LoginForm from '@/components/LoginForm.vue'
+import Layout from '@/components/Layout.vue'
+
 import { mapActions } from 'vuex'
 
 export default {
   name: 'LoginPage',
   components: {
-    LoginForm
+    LoginForm,
+    Layout
   },
   methods: {
     onSubmit (payload) {

@@ -10,8 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ErrorInfoApi implements Serializable {
-    private final List<DetailErrorInfoApi> details =
-            new ArrayList<DetailErrorInfoApi>();
+    private final List<DetailErrorInfoApi> details = new ArrayList<DetailErrorInfoApi>();
 
     private String message;
 

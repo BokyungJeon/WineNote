@@ -36,8 +36,7 @@ public class MemberController {
     private MessageSource messageSource;
 
     @PostMapping("")
-    public ResponseEntity<Member> register(@Validated @RequestBody Member member)
-                                                                    throws Exception {
+    public ResponseEntity<Member> register(@Validated @RequestBody Member member) throws Exception {
         log.info("member.getUserName(): " + member.getUserName());
 
         String inputPassword = member.getUserPw();
@@ -72,9 +71,8 @@ public class MemberController {
     }
 
     @PutMapping("/{userNo}")
-    public ResponseEntity<Member> modify(@PathVariable("userNo") Long userNo,
-                                         @Validated @RequestBody Member member)
-                                                                throws Exception {
+    public ResponseEntity<Member> modify(@PathVariable("userNo") Long userNo, @Validated @RequestBody Member member)
+            throws Exception {
         log.info("modify - member.getUserName(): " + member.getUserName());
         log.info("modify - userNo: " + userNo);
 
@@ -84,29 +82,19 @@ public class MemberController {
         return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/setup",
-                    method = RequestMethod.POST,
-                    produces = "text/plain;charset=UTF-8")
-    public ResponseEntity<String> setupAdmin(@Validated @RequestBody Member member)
-                                                                    throws Exception {
+    @RequestMapping(value = "/setup", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public ResponseEntity<String> setupAdmin(@Validated @RequestBody Member member) throws Exception {
         log.info("setupAdmin: member.getUserName(): " + member.getUserName());
         log.info("setupAdmin: service.countAll(): " + service.countAll());
 
-        if (service.countAll() == 0) {
-            String inputPassword = member.getUserPw();
-            member.setUserPw(passwordEncoder.encode(inputPassword));
+        String inputPassword = member.getUserPw();
+        member.setUserPw(passwordEncoder.encode(inputPassword));
 
-            member.setJob("Admin");
+        member.setJob("Admin");
 
-            service.setupAdmin(member);
+        service.setupAdmin(member);
 
-            return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
-        }
-
-        String message = messageSource.getMessage("common.cannotSetupAdmin",
-                null, Locale.KOREAN);
-
-        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
     }
 
     @GetMapping("/myinfo")

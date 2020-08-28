@@ -1,104 +1,112 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="layout">
     <v-app-bar
-      app
-      clipped-right
-      color="blue"
+      absolute
+      color="#fcb69f"
       dark
+      shrink-on-scroll
+      src="@/assets/wineback.jpg"
+      scroll-target="#scrolling-techniques-2"
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title><div @click="home">Crawl Project</div></v-toolbar-title>
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+        ></v-img>
+      </template>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-toolbar-title>
+        <router-link :to="{ name: 'Home' }" class="nav-link" active-class="active">
+          <img src="@/assets/winelogo.png">
+        </router-link>
+      </v-toolbar-title>
+
       <v-spacer></v-spacer>
-      <slot name="menubar"></slot>
+      <div id="header" v-if="isAuthorized">
+        <v-btn id="myboard" @click="$router.push('BoardListPage')" style="margin-left: 70px">My Board</v-btn>
+        <v-btn id="login" @click="onClickLogout" color="black" style="margin-top: 2.2px">Logout</v-btn>
+        <div>
+          <br><span>{{ myinfo.auth }}님, 환영합니다!</span>
+        </div>
+      </div>
+
+      <div id="header" v-else>
+        <v-btn id="login" @click="$router.push('LoginPage')">
+          Login
+        </v-btn>
+        <v-btn id="login" @click="$router.push('SignupPage')">
+          Signup
+        </v-btn>
+      </div>
     </v-app-bar>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-    >
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
-          <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title @click="home">홈으로 이동</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
-          <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title @click="category">카테고리별 분류 보기</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
-          <v-list-item-action>
-            <div>>>></div>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title @click="suggest">추천 뉴스 보기</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
-          <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title @click="savednews()">저장된 뉴스 보기</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
     <v-container>
       <v-content id="content">
         <slot name="content" class="font">
         </slot>
       </v-content>
     </v-container>
-
-    <v-footer
-      app
-      color="blue"
-      class="white--text"
-    >
-      <v-spacer></v-spacer>
-      <span>&copy; Crawl Project</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
-import router from '../router'
+// @ is an alias to /src
+// import HelloWorld from '@/components/HelloWorld.vue'
+/* eslint-disable no-unused-vars */
+import store from '../store'
+import Vue from 'vue'
+// import cookies from 'vue-cookies'
+
+import { mapState, mapGetters, mapActions } from 'vuex'
+
+// Vue.use(cookies)
 
 export default {
-  data: () => ({
-    drawer: false,
-    left: false
-  }),
-  methods: {
-    home () {
-      (window.location.pathname !== '/') ? router.push('/') : router.go(0)
-    },
-    category () {
-      (window.location.pathname !== '/CrawlCategory') ? router.push('/CrawlCategory') : router.go(0)
-    },
-    suggest () {
-      (window.location.pathname !== '/suggestednews/list') ? router.push('/suggestednews/list') : router.go(0)
-    },
-    savednews () {
-      (window.location.pathname !== '/savednews/list') ? router.push('/savednews/list') : router.go(0)
+  name: 'Home',
+  components: {
+  },
+  data: function () {
+    return {
     }
+  },
+  methods: {
+    onClickLogout () {
+      this.logout()
+      alert('Success Logout')
+      this.$router.push({ name: 'Home' })
+    },
+    ...mapActions(['logout'])
+  },
+  computed: {
+    ...mapState(['myinfo']),
+    ...mapGetters(['isAuthorized'])
   }
 }
 </script>
+
+<style scoped>
+div {
+}
+
+#header {
+  padding: 15px;
+  margin-bottom: 15px;
+  margin: 5px 5px;
+}
+
+img {
+  width: auto;
+  height: auto;
+  max-width: 1000px;
+  max-height: 350px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login {
+  background-color: #77aadd;
+  color: #ffffff;
+  font-weight: bold;
+  float: right;
+}
+
+</style>

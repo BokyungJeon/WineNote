@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-public final class SecurityConstants {
+public class SecurityConstants {
     public static final String AUTH_LOGIN_URL = "/api/authenticate";
 
     // http://www.allkeysgenerator.com
