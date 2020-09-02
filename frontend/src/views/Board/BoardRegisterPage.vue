@@ -1,18 +1,24 @@
 <template>
-  <div align="center">
-    <h2>Board Register</h2>
-    <board-register-form @submit="onSubmit"/>
-  </div>
+  <layout>
+    <template #content>
+      <div align="center">
+        <h2>Board Register</h2>
+        <board-register-form @submit="onSubmit"/>
+      </div>
+    </template>
+  </layout>
 </template>
 
 <script>
 import BoardRegisterForm from '@/components/BoardForm/BoardRegisterForm'
 import axios from 'axios'
+import Layout from '@/components/Layout'
 
 export default {
   name: 'BoardRegisterPage',
   components: {
-    BoardRegisterForm
+    BoardRegisterForm,
+    Layout
   },
   methods: {
     onSubmit (payload) {

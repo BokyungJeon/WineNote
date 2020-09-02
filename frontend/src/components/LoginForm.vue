@@ -1,3 +1,8 @@
+<style>
+body {
+background-color: #ddd7cb;
+}
+</style>
 <template>
   <v-app id="login" >
     <v-row align="center" justify="center">
@@ -17,7 +22,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col align="center">
           <v-btn type="submit">Login</v-btn>
         </v-col>
       </v-form>

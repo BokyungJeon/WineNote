@@ -1,21 +1,24 @@
 <template>
-  <div id="board" align="center">
-    <h2>Board List</h2>
-    <router-link :to="{ name: 'BoardRegisterPage' }">
-      Create New Board
-    </router-link>
-    <board-list-form :boards="boards"/>
-  </div>
+  <layout>
+    <template #content>
+      <router-link :to="{ name: 'BoardRegisterPage' }">
+        New Note
+      </router-link>
+      <board-list-form :boards="boards"/>
+    </template>
+  </layout>
 </template>
 
 <script>
 import BoardListForm from '@/components/BoardForm/BoardListForm'
 import { mapState, mapActions } from 'vuex'
+import Layout from '@/components/Layout'
 
 export default {
   name: 'BoardListPage',
   components: {
-    BoardListForm
+    BoardListForm,
+    Layout
   },
   computed: {
     ...mapState(['boards'])

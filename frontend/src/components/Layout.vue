@@ -1,43 +1,101 @@
+<style>
+body {
+background-color: #ddd7cb;
+}
+</style>
+
 <template>
-  <v-app id="layout">
+  <v-app id="layout" style="background-color: #ddd7cb">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      right
+    >
+      <v-list dense>
+        <v-list-item
+          router-link :to="{ name: 'Home' }">
+          <v-list-item-action>
+            <v-icon>mdi-home></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              Home
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item router-link :to="{ name: 'BoardListPage' }">
+          <v-list-item-action>
+            <v-icon>mdi-home></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              My Note
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item router-link :to="{ name: 'NewsPage' }">
+          <v-list-item-action>
+            <v-icon>mdi-home></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              News
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-app-bar
-      absolute
-      color="#fcb69f"
+      app
+      flat
+      color="#ddd7cb"
       dark
       shrink-on-scroll
-      src="@/assets/wineback.jpg"
       scroll-target="#scrolling-techniques-2"
     >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-        ></v-img>
-      </template>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
       <v-toolbar-title>
-        <router-link :to="{ name: 'Home' }" class="nav-link" active-class="active">
+        <router-link :to="{ name: 'Home' }"
+          class="nav-link"
+          active-class="active"
+        >
           <img src="@/assets/winelogo.png">
         </router-link>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <div id="header" v-if="isAuthorized">
-        <v-btn id="myboard" @click="$router.push('BoardListPage')" style="margin-left: 70px">My Board</v-btn>
-        <v-btn id="login" @click="onClickLogout" color="black" style="margin-top: 2.2px">Logout</v-btn>
-        <div>
-          <br><span>{{ myinfo.auth }}님, 환영합니다!</span>
-        </div>
-      </div>
 
-      <div id="header" v-else>
-        <v-btn id="login" @click="$router.push('LoginPage')">
-          Login
-        </v-btn>
-        <v-btn id="login" @click="$router.push('SignupPage')">
-          Signup
-        </v-btn>
-      </div>
+      <v-table align="right">
+        <v-row>
+          <v-col>
+            <v-app-bar-nav-icon
+              @click.stop="drawer = !drawer"
+            ></v-app-bar-nav-icon>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <div id="loginHeader">
+              <div v-if="isAuthorized">
+                {{ myinfo.auth }}님, 환영합니다.
+                <v-btn id="mynote" @click="$router.push('BoardListPage')">
+                  My Note
+                </v-btn>
+                <v-btn id="login" @click="onClickLogout" style="margin-left: 10px">Logout</v-btn>
+              </div>
+              <div v-else>
+               <v-btn id="login" color="normal" @click="$router.push('LoginPage')">Login</v-btn>
+               <v-btn id="signup" color="normal" @click="$router.push('SignupPage')" style="margin-left: 10px">Signup</v-btn>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+      </v-table>
     </v-app-bar>
+
     <v-container>
       <v-content id="content">
         <slot name="content" class="font">
@@ -48,30 +106,24 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-/* eslint-disable no-unused-vars */
-import store from '../store'
-import Vue from 'vue'
-// import cookies from 'vue-cookies'
 
+// import router from '../router'
+// import store from '../store'
+// import Vue from 'vue'
 import { mapState, mapGetters, mapActions } from 'vuex'
 
-// Vue.use(cookies)
-
 export default {
-  name: 'Home',
-  components: {
-  },
+  name: 'Layout',
   data: function () {
     return {
+      drawer: false
     }
   },
   methods: {
     onClickLogout () {
       this.logout()
       alert('Success Logout')
-      this.$router.push({ name: 'Home' })
+      this.$route.push({ name: 'Home' })
     },
     ...mapActions(['logout'])
   },
@@ -81,32 +133,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-div {
-}
-
-#header {
-  padding: 15px;
-  margin-bottom: 15px;
-  margin: 5px 5px;
-}
-
-img {
-  width: auto;
-  height: auto;
-  max-width: 1000px;
-  max-height: 350px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#login {
-  background-color: #77aadd;
-  color: #ffffff;
-  font-weight: bold;
-  float: right;
-}
-
-</style>

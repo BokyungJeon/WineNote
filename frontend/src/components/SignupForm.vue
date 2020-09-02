@@ -11,6 +11,13 @@
         </v-col>
         <v-col align="center">
           <v-text-field
+            v-model="userName"
+            label="Name"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col align="center">
+          <v-text-field
             input type="password"
             v-model="userPw"
             label="Password"
@@ -18,7 +25,7 @@
           ></v-text-field>
         </v-col>
         <v-col>
-          <v-btn type="submit">Login</v-btn>
+          <v-btn type="submit">Sign Up</v-btn>
         </v-col>
       </v-form>
     </v-row>
