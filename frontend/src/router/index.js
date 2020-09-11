@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Starter from '../views/Starter.vue'
 import Home from '../views/Home.vue'
 
 // For Login System
-import LoginPage from '../views/LoginPage.vue'
-import SignupPage from '../views/SignupPage.vue'
+import LoginPage from '../views/Member/LoginPage.vue'
+import SignupPage from '../views/Member/SignupPage.vue'
 
 // For Cafe Board
 import BoardListPage from '../views/Board/BoardListPage.vue'
@@ -12,11 +13,20 @@ import BoardRegisterPage from '../views/Board/BoardRegisterPage.vue'
 import BoardModifyPage from '../views/Board/BoardModifyPage.vue'
 import BoardReadPage from '../views/Board/BoardReadPage.vue'
 
+import GalleryPage from '../views/Gallery/GalleryPage.vue'
+import MyPhotoPage from '../views/MyPhoto/MyPhotoPage.vue'
+import NewsPage from '../views/News/NewsPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'Starter',
+    component: Starter
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home
   },
@@ -66,6 +76,27 @@ const routes = [
     },
     props: {
       default: true
+    }
+  },
+  {
+    path: '/myPhotoPage',
+    name: 'MyPhotoPage',
+    components: {
+      default: MyPhotoPage
+    }
+  },
+  {
+    path: '/galleryPage',
+    name: 'GalleryPage',
+    components: {
+      default: GalleryPage
+    }
+  },
+  {
+    path: '/NewsPage',
+    name: 'NewsPage',
+    components: {
+      default: NewsPage
     }
   }
 ]

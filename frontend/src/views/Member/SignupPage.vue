@@ -8,7 +8,7 @@
 
 <script>
 import axios from 'axios'
-import SignupForm from '@/components/SignupForm.vue'
+import SignupForm from '@/components/Member/SignupForm.vue'
 import Layout from '@/components/Layout.vue'
 
 export default {

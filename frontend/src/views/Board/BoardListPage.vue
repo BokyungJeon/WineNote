@@ -1,9 +1,10 @@
 <template>
   <layout>
     <template #content>
-      <router-link :to="{ name: 'BoardRegisterPage' }">
-        New Note
-      </router-link>
+      <h2>" No Note have been created yet. "</h2><br>
+      <v-btn @click="$router.push({name: 'BoardRegisterPage'})">
+        Create New Note
+      </v-btn>
       <board-list-form :boards="boards"/>
     </template>
   </layout>

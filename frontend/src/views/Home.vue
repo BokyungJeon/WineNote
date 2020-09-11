@@ -1,11 +1,7 @@
 <template>
-  <Layout>
-    <v-sheet
-      id="scrolling-techniques-2"
-      class="overflow-y-auto"
-      max-height="600"
-    >
-      <v-container style="height: 2000px;">
+  <div>
+    <Layout>
+      <template #content>
         <v-carousel
           cycle
           height="400"
@@ -30,9 +26,9 @@
             </v-sheet>
           </v-carousel-item>
         </v-carousel>
-      </v-container>
-    </v-sheet>
-  </Layout>
+      </template>
+    </Layout>
+  </div>
 </template>
 
 <script>
@@ -73,31 +69,13 @@ export default {
 }
 </script>
 
-<style scoped>
-div {
+<style>
+.v-application--wrap {
+  background-color: #ddd7cb;
 }
-
-#header {
-  padding: 15px;
-  margin-bottom: 15px;
-  margin: 5px 5px;
+.theme {
+  background-color: #ddd7cb;
 }
-
-img {
-  width: auto;
-  height: auto;
-  max-width: 1000px;
-  max-height: 350px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+.theme--light {
 }
-
-#login {
-  background-color: #77aadd;
-  color: #ffffff;
-  font-weight: bold;
-  float: right;
-}
-
 </style>

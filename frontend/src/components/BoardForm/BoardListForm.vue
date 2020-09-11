@@ -1,28 +1,36 @@
 <template>
   <div>
-    <h3>Board List View</h3>
+    <h3>My Wine List</h3>
     <table border="1">
       <tr>
-        <th align="center" width="80">No</th>
-        <th align="center" width="320">Title</th>
-        <th align="center" width="100">Writer</th>
+        <th align="center" width="40">No</th>
+        <th align="center" width="160">Product Name</th>
+        <th align="center" width="160">Winery</th>
+        <th align="center" width="80">Type</th>
+        <th align="center" width="80">Region</th>
+        <th align="center" width="160">Grape</th>
         <th align="center" width="180">Registration Date</th>
       </tr>
       <tr v-for="page in paginatedData" :key="page.boardNo">
         <td>{{ page.boardNo }}</td>
-        <td>{{ page.title }}</td>
-        <td>{{ page.writer }}</td>
+        <td>{{ page.product }}</td>
+        <td>{{ page.winery }}</td>
+        <td>{{ page.type }}</td>
+        <td>{{ page.regions }}</td>
+        <td>{{ page.grapes }}</td>
         <td>{{ page.regDate }}</td>
       </tr>
     </table>
     <div class="btn-cover">
-      <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-        이전
-      </button>
-      <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-        다음
-      </button>
+      <v-btn class="page-btn"
+        :disabled="pageNum === 0"
+        @click="prevPage"
+      >이전</v-btn>
+      <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} page</span>
+      <v-btn class="page-btn"
+        :disabled="pageNum >= pageCount - 1"
+        @click="nextPage"
+      >다음</v-btn>
     </div>
   </div>
 </template>

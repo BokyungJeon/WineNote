@@ -1,11 +1,6 @@
-<style>
-body {
-background-color: #ddd7cb;
-}
-</style>
 <template>
-  <v-app id="login" >
-    <v-row align="center" justify="center">
+  <v-app id="login" style="margin-top: 130px">
+    <v-row justify="center">
       <v-form @submit.prevent="submit">
         <v-col align="center">
           <v-text-field

@@ -35,6 +35,17 @@ background-color: #ddd7cb;
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item router-link :to="{ name: 'MyPhotoPage' }">
+          <v-list-item-action>
+            <v-icon>mdi-home></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              MyPhoto
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item router-link :to="{ name: 'NewsPage' }">
           <v-list-item-action>
             <v-icon>mdi-home></v-icon>
@@ -45,16 +56,40 @@ background-color: #ddd7cb;
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item router-link :to="{ name: 'GalleryPage' }">
+          <v-list-item-action>
+            <v-icon>mdi-home></v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              Gallery
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
+      <v-btn
+        absolute
+        dark
+        fab
+        right
+        color="nomal"
+        style="margin-top: 100%"
+        @click="$router.push('board/create')"
+      >
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
     </v-navigation-drawer>
 
     <v-app-bar
       app
       flat
-      color="#ddd7cb"
+      color="transparent"
       dark
       shrink-on-scroll
       scroll-target="#scrolling-techniques-2"
+      height="150px"
     >
 
       <v-toolbar-title>
@@ -68,17 +103,10 @@ background-color: #ddd7cb;
 
       <v-spacer></v-spacer>
 
-      <v-table align="right">
-        <v-row>
-          <v-col>
-            <v-app-bar-nav-icon
-              @click.stop="drawer = !drawer"
-            ></v-app-bar-nav-icon>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <div id="loginHeader">
+      <div id="loginHeader">
+        <v-container>
+          <v-row>
+            <v-col>
               <div v-if="isAuthorized">
                 {{ myinfo.auth }}님, 환영합니다.
                 <v-btn id="mynote" @click="$router.push('BoardListPage')">
@@ -87,19 +115,24 @@ background-color: #ddd7cb;
                 <v-btn id="login" @click="onClickLogout" style="margin-left: 10px">Logout</v-btn>
               </div>
               <div v-else>
-               <v-btn id="login" color="normal" @click="$router.push('LoginPage')">Login</v-btn>
-               <v-btn id="signup" color="normal" @click="$router.push('SignupPage')" style="margin-left: 10px">Signup</v-btn>
+               <v-btn id="login" color="normal" @click="$router.push('LoginPage')" style="padding: 0px 19px">Log in</v-btn>
+               <v-btn id="signup" color="normal lighten-4" @click="$router.push('SignupPage')" style="margin-left: 10px">Signup</v-btn>
               </div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-table>
+            </v-col>
+          </v-row>
+        </v-container>
+      </div>
+      <v-app-bar-nav-icon
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-container>
-      <v-content id="content">
-        <slot name="content" class="font">
-        </slot>
+      <v-content id="content"
+        style="padding: 0px 0px"
+        align="center"
+      >
+        <slot name="content"></slot>
       </v-content>
     </v-container>
   </v-app>
