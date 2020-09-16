@@ -1,5 +1,5 @@
 export default {
-  // Vue Board
+  // For Board
   boards: [],
   board: null,
   // For Login

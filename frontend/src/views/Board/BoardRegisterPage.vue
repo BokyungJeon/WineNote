@@ -22,14 +22,14 @@ export default {
   methods: {
     onSubmit (payload) {
       console.log('BoardRegisterPage onSubmit()')
-      const { title, content, writer } = payload
-      axios.post('http://localhost:7777/boards', { title, writer, content })
+      const { type, product, winery, vintage, grapes, country, regions, contents, scents } = payload
+      axios.post('http://localhost:7777/boards', { type, product, winery, vintage, grapes, country, regions, contents, scents })
         .then(res => {
           console.log(res)
           alert('Register Success')
           this.$router.push({
             name: 'BoardReadPage',
-            params: { boardNo: res.data.boardNo.toString() }
+            params: { board_no: res.data.board_no.toString() }
           })
         })
         .catch(err => {

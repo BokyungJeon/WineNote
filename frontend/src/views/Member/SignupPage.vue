@@ -22,9 +22,9 @@ export default {
       console.log('payload: ' + payload.userId +
                   ', ' + payload.userName +
                   ', ' + payload.userPw)
-      const { userId, userName, userPw } = payload
+      const { userId, userName, userPw, userEmail } = payload
       axios.post('http://localhost:7777/users/setup',
-        { userId, userName, userPw })
+        { userId, userName, userPw, userEmail })
         .then(res => {
           alert('Register Success')
           this.$router.push({

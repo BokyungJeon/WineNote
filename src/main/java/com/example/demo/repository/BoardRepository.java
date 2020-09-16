@@ -21,7 +21,8 @@ public class BoardRepository {
     private JdbcTemplate jdbcTemplate;
 
     public void create(Board board) throws Exception {
-        String query = "insert into board (title, content, writer) values (?, ?, ?)";
+        String query = "insert into board (type, product, winery, vintage, grapes, country, regions, contents, scents) " +
+                "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
@@ -29,9 +30,15 @@ public class BoardRepository {
                     @Override
                     public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                         PreparedStatement ps = con.prepareStatement(query, new String[] {"boardNo"});
-                        ps.setString(1, board.getTitle());
-                        ps.setString(2, board.getContent());
-                        ps.setString(3, board.getWriter());
+                        ps.setString(1, board.getType());
+                        ps.setString(2, board.getProduct());
+                        ps.setString(3, board.getWinery());
+                        ps.setString(4, board.getVintage());
+                        ps.setString(4, board.getGrapes());
+                        ps.setString(4, board.getCountry());
+                        ps.setString(4, board.getRegions());
+                        ps.setString(4, board.getContents());
+                        ps.setString(4, board.getScents());
                         return ps;
                     }
                 }, keyHolder);
@@ -39,16 +46,24 @@ public class BoardRepository {
     }
 
     public List<Board> list() throws Exception {
-        List<Board> results = jdbcTemplate.query("select board_no, title, content, writer, reg_date from board where board_no > 0 order by board_no desc, reg_date desc",
+        List<Board> results = jdbcTemplate.query(
+                "select board_no, type, product, winery, vintage, grapes, country, regions, contents, scents, reg_date " +
+                        "from board where board_no > 0 order by board_no desc, reg_date desc",
                 new RowMapper<Board>() {
                     @Override
                     public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Board board = new Board();
 
                         board.setBoardNo(rs.getInt("board_no"));
-                        board.setTitle(rs.getString("title"));
-                        board.setContent(rs.getString("content"));
-                        board.setWriter(rs.getString("writer"));
+                        board.setType(rs.getString("type"));
+                        board.setProduct(rs.getString("product"));
+                        board.setWinery(rs.getString("winery"));
+                        board.setVintage(rs.getString("vintage"));
+                        board.setGrapes(rs.getString("grapes"));
+                        board.setCountry(rs.getString("country"));
+                        board.setRegions(rs.getString("regions"));
+                        board.setContents(rs.getString("contents"));
+                        board.setScents(rs.getString("scents"));
                         board.setRegDate(rs.getDate("reg_date"));
 
                         return board;
@@ -60,16 +75,24 @@ public class BoardRepository {
     }
 
     public Board read(Long boardNo) throws Exception {
-        List<Board> results = jdbcTemplate.query("select board_no, title, content, writer, reg_date from board where board_no =?",
+        List<Board> results = jdbcTemplate.query(
+                "select board_no, type, product, winery, vintage, grapes, country, regions, contents, scents, reg_date " +
+                        "from board where board_no =?",
                 new RowMapper<Board>() {
                     @Override
                     public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
                         Board board = new Board();
 
                         board.setBoardNo(rs.getInt("board_no"));
-                        board.setTitle(rs.getString("title"));
-                        board.setContent(rs.getString("content"));
-                        board.setWriter(rs.getString("writer"));
+                        board.setType(rs.getString("type"));
+                        board.setProduct(rs.getString("product"));
+                        board.setWinery(rs.getString("winery"));
+                        board.setVintage(rs.getString("vintage"));
+                        board.setGrapes(rs.getString("grapes"));
+                        board.setCountry(rs.getString("country"));
+                        board.setRegions(rs.getString("regions"));
+                        board.setContents(rs.getString("contents"));
+                        board.setScents(rs.getString("scents"));
                         board.setRegDate(rs.getDate("reg_date"));
 
                         System.out.println("VueBoardRepository: " + board);
@@ -88,7 +111,9 @@ public class BoardRepository {
     }
 
     public void update(Board board) throws Exception {
-        String query = "update board set title = ?, content = ?, where board_no = ?";
-        jdbcTemplate.update(query, board.getTitle(), board.getContent(), board.getBoardNo());
+        String query = "update board set type = ?, product = ?, winery = ?, vintage = ?, grapes = ?, country = ?, regions = ?, contents = ?, scents = ?" +
+                "where board_no = ?";
+        jdbcTemplate.update(query, board.getType(), board.getProduct(), board.getWinery(), board.getVintage(),
+                board.getGrapes(), board.getCountry(), board.getRegions(), board.getContents(), board.getScents());
     }
 }

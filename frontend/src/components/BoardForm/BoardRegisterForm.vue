@@ -78,7 +78,7 @@
             <v-col>
              <v-textarea
                v-model="contents"
-               background-color="grey lighten-3"
+               background-color="#FFFDE7"
                color="cyan"
                label="Note"
              ></v-textarea>
@@ -86,10 +86,31 @@
           </v-row>
           <v-row>
             <v-col>
-              <v-sheet>
-                <v-chip-group column close @click:close="remove(item)">
-                  <v-chip v-for="(item, i) in aroma" :key="i">
-                    {{ item }}
+              <v-sheet style="background: #FFFDE7; min-height: 50px; padding-left: 6px;">
+                <v-chip-group column>
+                  <v-chip
+                    class="scents"
+                    color="#D4E157"
+                    close
+                    @click:close="remove(item)"
+                    v-for="(item, i) in scents" :key="i"
+                    >{{ item }}
+                  </v-chip>
+                </v-chip-group>
+              </v-sheet>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-sheet style="background: #ddd7cb">
+                <v-chip-group column>
+                  <v-chip
+                    class="aroma"
+                    color="#757575"
+                    outlined
+                    @click="add(item)"
+                    v-for="(item, i) in aroma" :key="i"
+                    >{{ item }}
                   </v-chip>
                 </v-chip-group>
               </v-sheet>
@@ -105,7 +126,7 @@
         </v-container>
       </v-card>
 
-      <div style="margin-top:10px">
+      <div style="margin: 10px 0 80px 0">
         <v-btn type="submit" label="Register" style="margin-right:20px">Register</v-btn>
         <v-btn @click="$router.push('BoardListPage')" label="Cancel">Cancel</v-btn>
       </div>
@@ -118,16 +139,16 @@ export default {
   name: 'BoardRegisterForm',
   data () {
     return {
-      type: '',
-      product: '',
-      winery: '',
-      vintage: '',
-      grape: '',
-      country: '',
-      region: '',
-      price: '',
-      contents: '',
-      chips: [],
+      type: [],
+      product: [],
+      winery: [],
+      vintage: [],
+      grape: [],
+      country: [],
+      region: [],
+      price: [],
+      contents: [],
+      scents: [],
       types: ['red', 'white', 'Sparkling', 'Rose', 'Port', 'Dessert'],
       grapes: ['Carbernet Sauvignon', 'Merlot', 'Chardonnay', 'Pinot Noir', 'Malbec', 'Sauvignon Blanc', 'Shraz/Syrah', 'Zinfandel', 'Nebbiolo', 'Sangiovese', 'Pinot Grigio', 'Riesling', 'Chenin Blanc', 'Moscato', 'Albarino'],
       countries: ['France', 'Italy', 'Spain', 'USA', 'Portugal', 'Chile', 'New Zealand', 'Australia'],
@@ -146,17 +167,21 @@ export default {
   },
   methods: {
     onSubmit () {
-      const { type, product, winery, vintage, grapes, country, regions, contents, chips } = this
-      this.$emit('submit', { type, product, winery, vintage, grapes, country, regions, contents, chips })
+      const { type, product, winery, vintage, grapes, country, regions, contents, scents } = this
+      this.$emit('submit', { type, product, winery, vintage, grapes, country, regions, contents, scents })
     },
     cancel () {
       this.$router.push('BoardListPage')
     },
-    remove (item) {
-      this.chips.push(item)
+    add (item) {
+      this.scents.push(item)
       this.aroma.splice(this.aroma.indexOf(item), 1)
       this.aroma = [...this.aroma]
-      console.log('this.chips : ' + this.chips + 'this.aroma : ' + this.aroma)
+    },
+    remove (item) {
+      this.aroma.push(item)
+      this.scents.splice(this.scents.indexOf(item), 1)
+      this.scents = [...this.scents]
     }
   },
   updated: {

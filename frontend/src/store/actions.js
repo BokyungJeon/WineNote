@@ -34,6 +34,7 @@ export default {
     return axios.get('http://localhost:7777/users/myinfo')
       .then(res => {
         commit(SET_MY_INFO, res.data)
+        console.log('res.data=', res.data)
       })
   },
   logout ({ commit }) {

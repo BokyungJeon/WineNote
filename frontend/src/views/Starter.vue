@@ -35,6 +35,11 @@ li {
   list-style-type: none;
 }
 
+a { text-decoration: none; color: white; }
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+
 .clearfix:after {
   content: '';
   display: block;
@@ -42,7 +47,7 @@ li {
 }
 
 .starter-wrapper {
-  width: 960px;
+  max-width: 960px;
   margin: 50px auto;
 }
 

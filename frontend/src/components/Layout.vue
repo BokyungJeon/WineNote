@@ -1,9 +1,3 @@
-<style>
-body {
-background-color: #ddd7cb;
-}
-</style>
-
 <template>
   <v-app id="layout" style="background-color: #ddd7cb">
     <v-navigation-drawer
@@ -109,14 +103,14 @@ background-color: #ddd7cb;
             <v-col>
               <div v-if="isAuthorized">
                 {{ myinfo.auth }}님, 환영합니다.
-                <v-btn id="mynote" @click="$router.push('BoardListPage')">
+                <v-btn id="mynote" @click="$router.push({ name: 'BoardListPage'})">
                   My Note
                 </v-btn>
                 <v-btn id="login" @click="onClickLogout" style="margin-left: 10px">Logout</v-btn>
               </div>
               <div v-else>
-               <v-btn id="login" color="normal" @click="$router.push('LoginPage')" style="padding: 0px 19px">Log in</v-btn>
-               <v-btn id="signup" color="normal lighten-4" @click="$router.push('SignupPage')" style="margin-left: 10px">Signup</v-btn>
+               <v-btn id="login" color="normal" @click="$router.push({ name: 'LoginPage'})" style="padding: 0px 19px">Log in</v-btn>
+               <v-btn id="signup" color="normal lighten-4" @click="$router.push({ name: 'SignupPage'})" style="margin-left: 10px">Signup</v-btn>
               </div>
             </v-col>
           </v-row>
@@ -166,3 +160,9 @@ export default {
   }
 }
 </script>
+
+<style>
+body {
+background-color: #ddd7cb;
+}
+</style>
