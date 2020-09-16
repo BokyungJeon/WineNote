@@ -20,10 +20,12 @@ export default {
     Layout
   },
   methods: {
-    onSubmit (payload) {
+    async onSubmit (payload) {
       console.log('BoardRegisterPage onSubmit()')
-      const { type, product, winery, vintage, grapes, country, regions, contents, scents } = payload
-      axios.post('http://localhost:7777/boards', { type, product, winery, vintage, grapes, country, regions, contents, scents })
+      // const { type, product, winery, vintage, grapes, country, regions, contents, scents } = payload
+      // console.log('show me' + type)
+      // axios.post('http://localhost:7777/boards', { type, product, winery, vintage, grapes, country, regions, contents, scents })
+      axios.post('http://localhost:7777/boards', payload)
         .then(res => {
           console.log(res)
           alert('Register Success')

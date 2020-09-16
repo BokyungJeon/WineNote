@@ -1,7 +1,7 @@
 <template>
   <v-app id="boardregister" class="aa">
     <h2>What have you tried?</h2>
-    <v-form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
       <v-card flat style="padding: 20px 20px">
         <v-container fluid align="center">
           <v-row align="center">
@@ -130,7 +130,7 @@
         <v-btn type="submit" label="Register" style="margin-right:20px">Register</v-btn>
         <v-btn @click="$router.push('BoardListPage')" label="Cancel">Cancel</v-btn>
       </div>
-    </v-form>
+    </form>
   </v-app>
 </template>
 
@@ -139,15 +139,15 @@ export default {
   name: 'BoardRegisterForm',
   data () {
     return {
-      type: [],
-      product: [],
-      winery: [],
-      vintage: [],
-      grape: [],
-      country: [],
-      region: [],
-      price: [],
-      contents: [],
+      type: '',
+      product: '',
+      winery: '',
+      vintage: '',
+      grape: '',
+      country: '',
+      region: '',
+      price: '',
+      contents: '',
       scents: [],
       types: ['red', 'white', 'Sparkling', 'Rose', 'Port', 'Dessert'],
       grapes: ['Carbernet Sauvignon', 'Merlot', 'Chardonnay', 'Pinot Noir', 'Malbec', 'Sauvignon Blanc', 'Shraz/Syrah', 'Zinfandel', 'Nebbiolo', 'Sangiovese', 'Pinot Grigio', 'Riesling', 'Chenin Blanc', 'Moscato', 'Albarino'],
@@ -183,8 +183,6 @@ export default {
       this.scents.splice(this.scents.indexOf(item), 1)
       this.scents = [...this.scents]
     }
-  },
-  updated: {
   }
 }
 </script>
